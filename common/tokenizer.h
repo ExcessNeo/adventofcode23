@@ -67,3 +67,4 @@ token RequireToken(tokenizer* Tokenizer, token_type Type);
 token RequireIdentifier(tokenizer* Tokenizer, char* Match);
 tokenizer Tokenize(string Input, string FileName);
 string GetTokenTypeName(token_type Type);
+void AdvanceChars(tokenizer* Tokenizer, int count);

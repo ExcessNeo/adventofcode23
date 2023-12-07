@@ -241,7 +241,8 @@ token RequireToken(tokenizer* Tokenizer, token_type Type)
     token Token = GetToken(Tokenizer);
     if (Token.Type != Type)
     {
-        Error(Tokenizer, Token, (char*)"Unexpected token type (expected %s)", GetTokenTypeName(Type));
+        string TokenTypeName = GetTokenTypeName(Type);
+        Error(Tokenizer, Token, (char*)"Unexpected token type (expected %.*s)", TokenTypeName.Count, TokenTypeName.Data);
     }
     return Token;
 }
