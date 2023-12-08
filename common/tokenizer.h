@@ -20,6 +20,8 @@ enum token_type
     Token_At,
     Token_And,
     Token_Pipe,
+    Token_OpenParen,
+    Token_CloseParen,
 
     Token_Identifier,
     Token_Number,
