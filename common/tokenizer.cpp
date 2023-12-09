@@ -137,7 +137,6 @@ token GetTokenRaw(tokenizer* Tokenizer)
         case '*': {Token.Type = Token_Asterisk;} break;
         case '#': {Token.Type = Token_Pound;} break;
         case '+': {Token.Type = Token_Plus;} break;
-        case '-': {Token.Type = Token_Minus;} break;
         case '$': {Token.Type = Token_Dollar;} break;
         case '/': {Token.Type = Token_Slash;} break;
         case '%': {Token.Type = Token_Percent;} break;
@@ -181,19 +180,32 @@ token GetTokenRaw(tokenizer* Tokenizer)
                     AdvanceChars(Tokenizer, 1);
                 }
             }
-            else if (IsNumber(C))
+            else if (IsNumber(C) || C == '-' && IsNumber(Tokenizer->At[0]))
             {
-                s32 number = C - '0';
+                s64 number = 0;
+                b32 IsNegative = false;
+                if (C == '-')
+                {
+                    IsNegative = true;
+                }
+                else
+                {
+                    number = C - '0';
+                }
 
                 while (IsNumber(Tokenizer->At[0]))
                 {
-                    s32 digit = Tokenizer->At[0] - '0';
+                    s64 digit = Tokenizer->At[0] - '0';
                     number = 10 * number + digit;
                     AdvanceChars(Tokenizer, 1);
                 }
 
                 Token.Type = Token_Number;
-                Token.Number = number;
+                Token.Number = IsNegative ? -number : number;
+            }
+            else if (C == '-')
+            {
+                Token.Type = Token_Minus;
             }
             else
             {
@@ -215,13 +227,13 @@ token PeekTokenRaw(tokenizer* Tokenizer)
     return Result;
 }
 
-token GetToken(tokenizer* Tokenizer)
+token GetToken(tokenizer* Tokenizer, b32 IgnoreEndLine)
 {
     token Token;
     for (;;)
     {
         Token = GetTokenRaw(Tokenizer);
-        if (Token.Type == Token_Spacing || Token.Type == Token_EndOfLine)
+        if (Token.Type == Token_Spacing || (Token.Type == Token_EndOfLine && IgnoreEndLine))
         {
             // NOTE: Ignore these when we're getting "real" tokens
         }
@@ -233,10 +245,10 @@ token GetToken(tokenizer* Tokenizer)
 
     return Token;
 }
-token PeekToken(tokenizer* Tokenizer)
+token PeekToken(tokenizer* Tokenizer, b32 IgnoreEndLine)
 {
     tokenizer Temp = *Tokenizer;
-    token Result = GetToken(&Temp);
+    token Result = GetToken(&Temp, IgnoreEndLine);
     return Result;
 }
 

@@ -3,6 +3,7 @@
 #include <cstdint>
 
 #define ArrayCount(Array) (sizeof(Array) / sizeof((Array)[0]))
+#define Assert(Expression) if (!(Expression)) {*(volatile int *)0 = 0;}
 
 typedef uint8_t u8;
 typedef uint32_t u32;

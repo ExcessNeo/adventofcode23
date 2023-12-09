@@ -40,7 +40,7 @@ struct token
 
     token_type Type;
     string Text;
-    s32 Number;
+    s64 Number;
 };
 
 struct tokenizer
@@ -63,8 +63,8 @@ b32 TokenEquals(token Token, char* Match);
 b32 IsValid(token Token);
 token GetTokenRaw(tokenizer* Tokenizer);
 token PeekTokenRaw(tokenizer* Tokenizer);
-token GetToken(tokenizer* Tokenizer);
-token PeekToken(tokenizer* Tokenizer);
+token GetToken(tokenizer* Tokenizer, b32 IgnoreEndLine = true);
+token PeekToken(tokenizer* Tokenizer, b32 IgnoreEndLine = true);
 token RequireToken(tokenizer* Tokenizer, token_type Type);
 token RequireIdentifier(tokenizer* Tokenizer, char* Match);
 tokenizer Tokenize(string Input, string FileName);
