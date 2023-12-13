@@ -24,6 +24,7 @@ string GetTokenTypeName(token_type Type)
         case Token_Pipe: { return (BundleZ("pipe")); }
         case Token_OpenParen: { return (BundleZ("open paren")); }
         case Token_CloseParen: { return (BundleZ("close paren")); }
+        case Token_QuestionMark: { return (BundleZ("question mark")); }
 
         case Token_Identifier: { return (BundleZ("identifier")); }
         case Token_Number: { return (BundleZ("number")); }
@@ -146,6 +147,7 @@ token GetTokenRaw(tokenizer* Tokenizer)
         case '|': {Token.Type = Token_Pipe;} break;
         case '(': {Token.Type = Token_OpenParen;} break;
         case ')': {Token.Type = Token_CloseParen;} break;
+        case '?': {Token.Type = Token_QuestionMark;} break;
         // @formatter:on
 
         default:

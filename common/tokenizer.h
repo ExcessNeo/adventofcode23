@@ -22,6 +22,7 @@ enum token_type
     Token_Pipe,
     Token_OpenParen,
     Token_CloseParen,
+    Token_QuestionMark,
 
     Token_Identifier,
     Token_Number,
