@@ -16,7 +16,8 @@ string GetTokenTypeName(token_type Type)
         case Token_Plus: { return (BundleZ("plus")); }
         case Token_Minus: { return (BundleZ("minus")); }
         case Token_Dollar: { return (BundleZ("dollar")); }
-        case Token_Slash: { return (BundleZ("slash")); }
+        case Token_ForwardSlash: { return (BundleZ("forward slash")); }
+        case Token_BackwardSlash: { return (BundleZ("backward slash")); }
         case Token_Percent: { return (BundleZ("percent")); }
         case Token_Equals: { return (BundleZ("equals")); }
         case Token_At: { return (BundleZ("at")); }
@@ -139,7 +140,8 @@ token GetTokenRaw(tokenizer* Tokenizer)
         case '#': {Token.Type = Token_Pound;} break;
         case '+': {Token.Type = Token_Plus;} break;
         case '$': {Token.Type = Token_Dollar;} break;
-        case '/': {Token.Type = Token_Slash;} break;
+        case '/': {Token.Type = Token_ForwardSlash;} break;
+        case '\\': {Token.Type = Token_BackwardSlash;} break;
         case '%': {Token.Type = Token_Percent;} break;
         case '=': {Token.Type = Token_Equals;} break;
         case '@': {Token.Type = Token_At;} break;
