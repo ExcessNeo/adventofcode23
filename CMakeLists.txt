@@ -5,7 +5,7 @@ if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Release)
 endif()
 
-set(CMAKE_CXX_FLAGS "-Wall -Wextra -O3")
+set(CMAKE_CXX_FLAGS "-Wall -Wextra")
 set(CMAKE_CXX_FLAGS_DEBUG "-g")
 set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 
@@ -27,3 +27,4 @@ add_executable(daythirteen common/common.cpp common/tokenizer.cpp daythirteen.cp
 add_executable(dayfourteen common/common.cpp common/tokenizer.cpp dayfourteen.cpp)
 add_executable(dayfifteen common/common.cpp common/tokenizer.cpp dayfifteen.cpp)
 add_executable(daysixteen common/common.cpp common/tokenizer.cpp daysixteen.cpp)
+add_executable(daynineteen common/common.cpp common/tokenizer.cpp daynineteen.cpp)

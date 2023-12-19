@@ -26,6 +26,10 @@ string GetTokenTypeName(token_type Type)
         case Token_OpenParen: { return (BundleZ("open paren")); }
         case Token_CloseParen: { return (BundleZ("close paren")); }
         case Token_QuestionMark: { return (BundleZ("question mark")); }
+        case Token_OpenBrace: { return (BundleZ("open brace")); }
+        case Token_CloseBrace: { return (BundleZ("close brace")); }
+        case Token_LessThan: { return (BundleZ("less than")); }
+        case Token_GreaterThan: { return (BundleZ("greater than")); }
 
         case Token_Identifier: { return (BundleZ("identifier")); }
         case Token_Number: { return (BundleZ("number")); }
@@ -150,6 +154,10 @@ token GetTokenRaw(tokenizer* Tokenizer)
         case '(': {Token.Type = Token_OpenParen;} break;
         case ')': {Token.Type = Token_CloseParen;} break;
         case '?': {Token.Type = Token_QuestionMark;} break;
+        case '{': {Token.Type = Token_OpenBrace;} break;
+        case '}': {Token.Type = Token_CloseBrace;} break;
+        case '<': {Token.Type = Token_LessThan;} break;
+        case '>': {Token.Type = Token_GreaterThan;} break;
         // @formatter:on
 
         default:
@@ -287,5 +295,16 @@ tokenizer Tokenize(string Input, string FileName)
     Result.Input = Input;
     Refill(&Result);
 
+    return Result;
+}
+
+b32 OptionalToken(tokenizer* Tokenizer, token_type DesiredType)
+{
+    token Token = PeekToken(Tokenizer);
+    b32 Result = (Token.Type == DesiredType);
+    if (Result)
+    {
+        GetToken(Tokenizer);
+    }
     return Result;
 }

@@ -24,6 +24,10 @@ enum token_type
     Token_OpenParen,
     Token_CloseParen,
     Token_QuestionMark,
+    Token_OpenBrace,
+    Token_CloseBrace,
+    Token_LessThan,
+    Token_GreaterThan,
 
     Token_Identifier,
     Token_Number,
@@ -72,3 +76,4 @@ token RequireIdentifier(tokenizer* Tokenizer, char* Match);
 tokenizer Tokenize(string Input, string FileName);
 string GetTokenTypeName(token_type Type);
 void AdvanceChars(tokenizer* Tokenizer, int count);
+b32 OptionalToken(tokenizer* Tokenizer, token_type DesiredType);

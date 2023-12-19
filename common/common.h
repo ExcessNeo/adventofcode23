@@ -4,6 +4,7 @@
 
 #define ArrayCount(Array) (sizeof(Array) / sizeof((Array)[0]))
 #define Assert(Expression) if (!(Expression)) {*(volatile int *)0 = 0;}
+#define OffsetOf(type, member) ((umm)&(((type*)0)->member))
 
 typedef uint8_t u8;
 typedef uint16_t u16;
@@ -178,4 +179,21 @@ inline b32 StringsAreEqual(string A, string B)
 {
     b32 Result = StringsAreEqual(A.Count, (char *)A.Data, B.Count, (char *)B.Data);
     return Result;
+}
+
+inline void UpdateStringHash(u32* HashValue, char Value)
+{
+    *HashValue = 65599 * (*HashValue) + Value;
+}
+
+inline u32 StringHashOf(string S)
+{
+    u32 HashValue = 0;
+
+    for (umm I = 0; I < S.Count; ++I)
+    {
+        UpdateStringHash(&HashValue, (char)S.Data[I]);
+    }
+
+    return HashValue;
 }
